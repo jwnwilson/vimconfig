@@ -30,7 +30,7 @@ Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 "auto-completion stuff
 Plugin 'ervandew/supertab'
-"Plugin 'klen/python-mode'
+Plugin 'klen/python-mode'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'klen/rope-vim'
 "Plugin 'davidhalter/jedi-vim'
@@ -128,18 +128,42 @@ nnoremap <space> za
 "js stuff"
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 
-autocmd VimEnter * NERDTree 
+" Start nerdtree on startup
+"autocmd VimEnter * NERDTree 
 
-"split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
+"ctags file (not used currently)
 set tags=~/mytags
+
+let g:ycm_python_binary_path = '/usr/local/bin/python3'
 
 "open / close nerdtree
 map <F2> :NERDTreeToggle<CR>
 
-"GoTo command shortcuts
-noremap gt :YcmCompleter GoTo<CR>
+"split navigations
+nnoremap <Leader><Down> <C-W><C-J>
+nnoremap <Leader><Up> <C-W><C-K>
+nnoremap <Leader><Right> <C-W><C-L>
+nnoremap <Leader><Left> <C-W><C-H>
+
+"git short cuts
+nmap <Leader>gs :Gstatus<CR>
+nmap <Leader>gl :Glog<CR>
+nmap <Leader>gc :Gcommit<CR>
+nmap <Leader>gm :Gmerge<CR>
+nmap <Leader>gp :Gpush<CR>
+nmap <Leader>gf :Gpull<CR>
+nmap <Leader>gb :Gblame<CR>
+
+nmap fi :call Gfind()<CR>
+
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+
+let g:pydiction_location = '~/pydiction/complete-dict'
+
+function! Gfind()
+    let query = input('find text in cwd: ')
+    let command = ':vimgrep /' . query . '/j ' . getcwd() . '**/*.py'
+    exec command     
+    exec ':copen'
+endfunction
