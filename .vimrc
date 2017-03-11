@@ -122,7 +122,7 @@ set backspace=indent,eol,start
 "Folding based on indentation:
 autocmd FileType python set foldmethod=indent
 "use space to open folds
-nnoremap <space> za 
+"nnoremap <space> za 
 "----------Stop python PEP 8 stuff--------------
 
 "js stuff"
@@ -154,7 +154,9 @@ nmap <Leader>gp :Gpush<CR>
 nmap <Leader>gf :Gpull<CR>
 nmap <Leader>gb :Gblame<CR>
 
-nmap fi :call Gfind()<CR>
+nmap fip :call Gfind()<CR>
+nmap fif :call GfindFile()<CR>
+nmap <leader>p :pu!=PDB()<CR>
 
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
@@ -167,3 +169,16 @@ function! Gfind()
     exec command     
     exec ':copen'
 endfunction
+
+function! GfindFile()
+    let query = input('find text in file: ')
+    let command = ':vimgrep /' . query . '/j %'
+    exec command     
+    exec ':copen'
+endfunction
+
+function! PDB()
+    return "import pdb;pdb.set_trace()"
+endfunction 
+
+
