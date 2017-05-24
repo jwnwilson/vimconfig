@@ -65,6 +65,9 @@ set noswapfile
 "turn on numbering
 set nu
 
+"mouse scrolling
+:set mouse=a
+
 "python with virtualenv support
 py << EOF
 import os.path
@@ -134,7 +137,12 @@ autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 "ctags file (not used currently)
 set tags=~/mytags
 
+"python version
+"python3
 let g:ycm_python_binary_path = '/usr/local/bin/python3'
+
+"python2
+"let g:ycm_python_binary_path = '/usr/bin/python'
 
 "open / close nerdtree
 map <F2> :NERDTreeToggle<CR>
@@ -160,6 +168,11 @@ nmap <leader>p :pu!=PDB()<CR>
 
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <Leader>] :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <Leader>[ :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+
+"copy to clipboard
+nnoremap <LEader>y :exe "'<,'>:w !pbcopy"<CR>
 
 let g:pydiction_location = '~/pydiction/complete-dict'
 
