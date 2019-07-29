@@ -25,3 +25,6 @@ alias prettyjson='python -m json.tool'
 # Switching ssh keys for different git repos
 alias gwork="cp ~/.ssh/id_rsa_work ~/.ssh/id_rsa && cp ~/.ssh/id_rsa_work.pub ~/.ssh/id_rsa.pub"
 alias gpers="cp ~/.ssh/id_rsa_pers ~/.ssh/id_rsa && cp ~/.ssh/id_rsa_pers.pub ~/.ssh/id_rsa.pub"
+
+eval "$(pyenv init -)"
+eval "$(direnv hook bash)"
